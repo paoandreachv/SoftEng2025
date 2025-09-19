@@ -16,19 +16,39 @@ configure_file(cmake/HelloProjConfig.h.in HelloProjConfig.h)
 add_subdirectory(src/basic)
 
 #add executable
-option(HELLOWORD_WITH_EXECUTABLES "Compile mains" ON)
+option(HELLOWORLD_WITH_EXECUTABLES "Compile mains" ON)
 if(HELLOWORD_WITH_EXECUTABLES)
  message(STATUS "Configuring Hello World with executables")
  add_subdirectory(mains)
 endif()
 
-#add libraries
-add_subdirectory(tests)
-
 #add tests
-option(HELLOWORLD_WITH_TEST "Compile tests" ON)
+option(HELLOWORLD_WITH_TESTS "Compile tests" ON)
 if(HELLOWORLD_WITH_TESTS)
 	enable_testing()
 	message(STATUS "Configuring Hello World with tests")
 	add_subdirectory(tests)
 endif()
+
+# create the package configuration file
+include(CMakePackageConfigHelpers) 
+configure_package_config_file(
+	cmake/HelloProjConfig.cmake.in 
+	HelloProjConfig.cmake 
+	INSTALL_DESTINATION cmake/
+)
+
+#install project configuration file
+install(
+	FILES ${PROJECT_BINARY_DIR}/HelloProjConfig.cmake 
+	DESTINATION cmake/ 
+)
+
+ #Configure CPack
+if(WIN32)
+ set(CPACK_GENERATOR "ZIP")
+else()
+ set(CPACK_GENERATOR "TGZ")
+endif()
+# This must always be last!
+include(CPack)
