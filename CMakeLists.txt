@@ -17,9 +17,9 @@ add_subdirectory(src/basic)
 
 #add executable
 option(HELLOWORLD_WITH_EXECUTABLES "Compile mains" ON)
-if(HELLOWORD_WITH_EXECUTABLES)
- message(STATUS "Configuring Hello World with executables")
- add_subdirectory(mains)
+if(HELLOWORLD_WITH_EXECUTABLES)
+	message(STATUS "Configuring Hello World with executables")
+	add_subdirectory(mains)
 endif()
 
 #add tests

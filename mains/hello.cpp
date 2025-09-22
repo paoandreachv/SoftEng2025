@@ -1,8 +1,7 @@
-#include<basic/message.h>
-
+#include <basic/message.h>
 
 int main()
 {
-	hello_world();
-	print_version();
+    hello_world();
+    print_version();
 }
